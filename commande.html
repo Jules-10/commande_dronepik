@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset='utf-8'>
+    <title>Commande</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='style_achat.css'>
+</head>
+<body>
+    <header>
+        <img  src="./images/pub.png" alt="bannière Dronépik">
+		<h1>Formulaire de commande</h1>
+	</header>
+	
+    <form>
+	<p id="messageBienvenue">Bonjour !</p>
+
+    <!-- la zone à compléter avec les différents éléments de formulaire -->
+	
+	<div class="plusieursChamps">
+		<label>Nom : </label>
+		<input type="text" value="" onmouseout="getNoms()" id="saisiePrenom" class="zoneText" placeholder="Prénom">
+		<input type="text" value="" onmouseout="getNoms()" id="saisieNom" name="saisieNom" class="zoneText" placeholder="Nom de famille">
+	</div>
+
+	<div class="plusieursChamps">
+		<label>Contact : </label>
+		<input type="email" value="" id="saisieEmail" class="zoneText" placeholder="john.doe@gmail.com">
+		<input type="tel" value="" id="saisieNumTel" class="zoneText small" placeholder="02 99 28 81 00">
+	</div>
+
+	<div class="plusieursChamps">
+		<label>Adresse : </label>
+		<input type="text" value="" id="saisieAdresse" class="zoneText" placeholder="144 Bd de Vitré">
+		<input type="number" value="" id="saisieCodePostal" class="zoneText small" placeholder="35700">
+		<input type="text" value="" id="saisieVille" class="zoneText small" placeholder="RENNES">
+
+	</div>
+
+	<h2>Caractéristiques du Dronépik</h2>
+
+	<div class="labelEtChamp">
+		<label for="modeles">Modèle : </label>
+		<select id="modeles">
+			<option value="..." id="rien">....</option >
+			<option value="mouche" id="mouche"> mouche </option> 
+			<option value="moustique" id="moustique"> moustique </option>
+			<option value="guepe" id="guepe"> guêpe </option>
+			<option value="bourdon" id="bourdon"> bourdon </option>
+		</select>
+	</div>
+	
+	<div class="labelEtChamp">
+		<label for="resolution1">Resolutions : </label>
+		<div id="resolutions" class="rowDisplay">
+			<div class="labelEtChamp"><input type="radio" name="resolution" value="rad1" id="resolution1" > <label for="resolution1">1280p x 720p</label></div>
+			<div class="labelEtChamp"><input type="radio" name="resolution" value="rad2" id="resolution2" > <label for="resolution2">1920p x 1080p</label></div>
+			<div class="labelEtChamp"><input type="radio" name="resolution" value="rad3" id="resolution3" > <label for="resolution3">4096 x 2160p</label></div> 
+		</div>
+	</div>
+
+
+	<div class="labelEtChamp">
+		<label for="option1">Options : </label>
+		<div id="options" class="rowDisplay"> 
+			<div class="labelEtChamp"><input type="checkbox" name="option" value="check1" id="option1" > <label for="option1">Connexion bluetooth</label></div>
+			<div class="labelEtChamp"><input type="checkbox" name="option" value="check2" id="option2" > <label for="option2">Détecteur de mouvements</label></div>
+			<div class="labelEtChamp"><input type="checkbox" name="option" value="check3" id="option3" > <label for="option3">Bourdonnement réaliste</label></div>
+		</div>
+	</div>
+
+	<textarea name="commentaire" id="commentaire" rows="10" placeholder="Nous faire passer un message"></textarea>
+
+	
+	
+    <!-- fin de la zone à compléter -->
+    <!-- le bouton d'enregistrement du formulaire -->
+    <!-- <input type="button" value="tester" onclick="" id="test"> -->
+    <input type="button" value="Commander" onclick="enregistrer()" onmouseover="overButton('envoiForm')" onmouseout="notOverButton('envoiForm')" id="envoiForm" class="action">
+    </form>
+	<footer>
+		<p>© Jules Tennenbaum - NSI Joliot Curie - 19/03/2022</p>
+		<a href="http://jigsaw.w3.org/css-validator/check/referer">
+			<img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !" />
+		</a>
+	</footer>
+
+
+
+
+<script>
+
+	// récupère les noms et modifie l'affichage en conséquent
+	function getNoms(){
+		var prenom = document.getElementById("saisiePrenom").value;
+		var nom = document.getElementById("saisieNom").value;
+		var textAffiche = document.getElementById("messageBienvenue");
+		textAffiche.innerHTML = "Bonjour" + prenom + " " + nom + " !";
+	}
+	
+	// fonctions quand on passe la souris sur un bouton, et quand on en sort
+	function overButton(elmtID){
+		button = document.getElementById(elmtID);
+		button.style.filter = "brightness(1.1)";
+		button.style.border = "solid 2px #6b616f"
+		button.style.padding = "8px 28px";
+	}
+	function notOverButton(elmtID){
+		button = document.getElementById(elmtID);
+		button.style.filter = "brightness(1)";
+		button.style.border = "none";
+		button.style.padding = "10px 30px";
+	}
+	
+	// la fonction d'enregistrement du formulaire, à compléter
+	function enregistrer(){
+		// récupération des données des éléments du formulaire à compléter 
+		var contenu = [[],[],[],[],[],[],[0],[150]];
+		
+		contenu[0] = [document.getElementById("saisiePrenom").value, document.getElementById("saisieNom").value];
+		
+		contenu[1] = document.getElementById("saisieEmail").value + " ; " + document.getElementById("saisieNumTel").value;
+
+		contenu[2] = document.getElementById("saisieAdresse").value + ", " + document.getElementById("saisieCodePostal").value + " " + document.getElementById("saisieVille").value;
+
+		contenu[3] = document.getElementById("modeles").value;
+
+		if (document.getElementById('resolution1').checked){ contenu[4] = "1280p x 720p"; contenu[7] = parseInt(contenu[7]) + 50; }
+		if (document.getElementById('resolution2').checked){ contenu[4] = "1920p x 1280p"; contenu[7] = parseInt(contenu[7]) + 78; }
+		if (document.getElementById('resolution3').checked){ contenu[4] = "1920p x 1280p"; contenu[7] = parseInt(contenu[7]) + 112; }
+		
+		if (document.getElementById('option1').checked){ contenu[5].push("Connexion bluetooth"); contenu[7] = parseInt(contenu[7]) + 54; }
+		if (document.getElementById('option2').checked){ contenu[5].push("Détecteur de mouvements"); contenu[7] = parseInt(contenu[7]) + 73; }
+		if (document.getElementById('option3').checked){ contenu[5].push("Bourdonnement réaliste"); contenu[7] = parseInt(contenu[7]) + 27; }
+
+		if (document.getElementById("commentaire").value != "") contenu[6]=1;
+
+		// stockage en local des données dans la variable contenu
+		localStorage.setItem('maCommande', JSON.stringify(contenu));
+		// changement automatique de page vers l'accusé de réception
+		document.location.href="accuse.html";
+	}
+	
+</script>
+
+</body>
+</html>
